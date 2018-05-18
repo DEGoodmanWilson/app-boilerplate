@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'logger'
 require 'json'
 require 'openssl'
 require 'octokit'
@@ -42,6 +43,15 @@ class GHAapp < Sinatra::Application
 # Get the app identifier—an integer—from your app page after you create your app. This isn't actually a secret,
 # but it is something easier to configure at runtime
   APP_IDENTIFIER = ENV['GITHUB_APP_IDENTIFIER']
+
+
+########## Configure Sinatra
+#
+# Let's turn on verbose logging during development
+#
+  configure :development do
+    set :logging, Logger::DEBUG
+  end
 
 
 ########## Before each request to our app
